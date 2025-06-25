@@ -64,37 +64,47 @@ class _TrainerPageState extends State<TrainerPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Trainer List - ${widget.selectedLevel}',
-              style: const TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF343A40),
-              ),
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.deepPurple, size: 28),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Trainer List - ${widget.selectedLevel}',
+                  style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF343A40),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 20),
             loading
                 ? const Center(child: CircularProgressIndicator())
                 : Expanded(
-  child: ListView.separated(
-    itemCount: trainers.length,
-    separatorBuilder: (_, __) => const SizedBox(height: 16),
-    itemBuilder: (context, index) {
-      final trainer = trainers[index];
-      return TrainerCard(
-        trainer: trainer,
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => BookSchedulePage(trainer_id: trainer['id']),
-            ),
-          );
-        },
-      );
-    },
-  ),
-),
-
+                    child: ListView.separated(
+                      itemCount: trainers.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 16),
+                      itemBuilder: (context, index) {
+                        final trainer = trainers[index];
+                        return TrainerCard(
+                          trainer: trainer,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BookSchedulePage(trainer_id: trainer['id']),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
           ],
         ),
       ),

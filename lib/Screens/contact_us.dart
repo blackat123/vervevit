@@ -12,10 +12,10 @@ class ContactUsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), // Konsisten
         child: ListView(
           children: [
-            MenuAuthenticated(userName: userName, activeMenu: 'contact'), // Navbar di body
+            MenuAuthenticated(userName: userName, activeMenu: 'contact'), 
             const SizedBox(height: 24),
             const Text(
               'Get in Touch with Us',

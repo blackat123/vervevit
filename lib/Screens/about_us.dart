@@ -12,7 +12,7 @@ class AboutUsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), // Konsisten
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

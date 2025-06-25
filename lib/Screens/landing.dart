@@ -15,7 +15,7 @@ class LandingPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), // Konsisten
           child: Column(
             children: [
               MenuAuthenticated(userName: userName, activeMenu: 'home'), // Tambahkan navbar di sini

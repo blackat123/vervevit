@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vervefit/Screens/trainer_page.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -61,21 +62,41 @@ class LandingPage extends StatelessWidget {
         ),
         const SizedBox(height: 40),
         _buildButton(context, 'Beginner', Colors.lightGreen, () {
-          // Arahkan ke halaman Beginner
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) =>
+                  const TrainerPage(selectedLevel: 'Beginner'),
+            ),
+          );
         }),
         const SizedBox(height: 20),
         _buildButton(context, 'Intermediate', Colors.amber, () {
-          // Arahkan ke halaman Intermediate
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) =>
+                  const TrainerPage(selectedLevel: 'Intermediate'),
+            ),
+          );
         }),
         const SizedBox(height: 20),
         _buildButton(context, 'Advanced', Colors.redAccent, () {
-          // Arahkan ke halaman Advanced
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) =>
+                  const TrainerPage(selectedLevel: 'Advanced'),
+            ),
+          );
         }),
       ],
     );
   }
 
-  Widget _buildButton(BuildContext context, String text, Color color, VoidCallback onTap) {
+  Widget _buildButton(
+    BuildContext context,
+    String text,
+    Color color,
+    VoidCallback onTap,
+  ) {
     return SizedBox(
       width: double.infinity,
       height: 60,

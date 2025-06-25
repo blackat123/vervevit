@@ -34,7 +34,7 @@ class MenuAuthenticated extends StatelessWidget {
                 title: 'History',
                 isActive: true,
                 onNavigate: () {
-                  Navigator.of(context).pushReplacement(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const HistoryBookingPage(),
                     ),

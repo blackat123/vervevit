@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vervefit/Screens/landing.dart';
 import 'package:vervefit/Screens/loginpage.dart';
+import 'package:vervefit/Screens/about_us.dart';
+import 'package:vervefit/Screens/contact_us.dart';
+import 'package:vervefit/Screens/history_booking_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -33,6 +36,12 @@ class MyApp extends StatelessWidget {
       home: Supabase.instance.client.auth.currentUser != null
           ? const LandingPage()
           : const LoginPage(),
+      routes: {
+        '/landing': (context) => const LandingPage(),
+        '/about': (context) => const AboutUsPage(),
+        '/contact': (context) => const ContactUsPage(),
+        '/history': (context) => const HistoryBookingPage(),
+      },
     );
   }
 }

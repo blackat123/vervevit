@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:vervefit/Components/menu_authenticated.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userName = Supabase.instance.client.auth.currentUser?.email ?? 'User';
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('About Us'),
-        backgroundColor: Colors.deepPurple,
-      ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            MenuAuthenticated(userName: userName, activeMenu: 'about'), // Navbar di body
+            const SizedBox(height: 24),
             const Text(
               'About VerveFit',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),

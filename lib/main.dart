@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vervefit/Screens/loginpage.dart';
+import 'package:vervefit/Screens/trainer_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://xpwvamfskixdyswyquhk.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhwd3ZhbWZza2l4ZHlzd3lxdWhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3NzAxMTEsImV4cCI6MjA2NjM0NjExMX0.DK3SBfPTmY6cIEpzkHUmT86ZFDyeO4HwhpUqr64QGYk',
+  );
+
   runApp(const MyApp());
 }
 

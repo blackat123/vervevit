@@ -19,15 +19,14 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'VerveFit Booking',
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Auth',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
       home: Supabase.instance.client.auth.currentUser != null
           ? const LandingPage()

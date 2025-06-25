@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vervefit/Screens/landing.dart';
 import 'package:vervefit/responsive.dart';
-import 'package:vervefit/Screens/history_booking_page.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});

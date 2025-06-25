@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:vervefit/Screens/loginpage.dart';
+import 'Screens/landing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,17 +8,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Auth',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
-      ),
-      home: LoginPage(),
+      title: 'VerveFit',
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      home: const LandingPage(), // Ganti ke landing page
     );
   }
 }

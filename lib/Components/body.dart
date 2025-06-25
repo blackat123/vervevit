@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vervefit/responsive.dart';
 import 'package:vervefit/Screens/history_booking_page.dart';
 
 class Body extends StatefulWidget {
@@ -32,10 +33,10 @@ class _BodyState extends State<Body> {
             backgroundColor: Colors.green,
           ),
         );
-        // Di sini Anda bisa menambahkan navigasi ke halaman utama (home page)
-        Navigator.of(
-          context,
-        ).push(MaterialPageRoute(builder: (context) => HistoryBookingPage()));
+
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HistoryBookingPage()),
+        );
       }
     } on AuthException catch (error) {
       if (mounted) {
@@ -70,16 +71,50 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    return Responsive(
+      mobile: _buildMobileLayout(),
+      tablet: _buildDesktopLayout(),
+      desktop: _buildDesktopLayout(),
+    );
+  }
+
+  Widget _buildMobileLayout() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            'Welcome Back,\nSign In to VerveFit',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 30),
+          _formLogin(),
+          const SizedBox(height: 30),
+          const Text(
+            "Your ultimate platform to find and book professional private trainers.",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black54, fontSize: 16),
+          ),
+          const SizedBox(height: 30),
+          Center(child: Image.asset('images/illustration1.png', width: 300)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDesktopLayout() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.height / 15,
-          ),
-          child: SizedBox(
-            width: 420,
+        Expanded(
+          flex: 3,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: MediaQuery.of(context).size.height / 15,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -98,13 +133,19 @@ class _BodyState extends State<Body> {
             ),
           ),
         ),
-        Image.asset('images/illustration3.png', width: 300),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.height / 15,
+
+        if (Responsive.isDesktop(context))
+          Expanded(
+            flex: 2,
+            child: Image.asset('images/illustration3.png', width: 300),
           ),
-          child: SizedBox(
-            width: 300,
+
+        Expanded(
+          flex: 2,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: MediaQuery.of(context).size.height / 15,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,

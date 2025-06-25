@@ -1,9 +1,8 @@
-// history_booking_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:vervefit/Components/booking_card.dart';
 import 'package:vervefit/Components/menu_authenticated.dart';
+import 'package:vervefit/responsive.dart';
 
 class HistoryBookingPage extends StatefulWidget {
   const HistoryBookingPage({super.key});
@@ -26,7 +25,6 @@ class _HistoryBookingPageState extends State<HistoryBookingPage> {
     final userId = _supabase.auth.currentUser!.id;
     final now = DateTime.now();
 
-    // Bagian ini tidak perlu diubah karena tidak memerlukan data trainer
     final bookingsToUpdate = await _supabase
         .from('booking')
         .select('id, status, jadwal!inner(tanggal, jam_mulai, jam_selesai)')
@@ -80,12 +78,9 @@ class _HistoryBookingPageState extends State<HistoryBookingPage> {
       await Future.wait(updateFutures);
     }
 
-    // DIUBAH: Query untuk mengambil data booking beserta data trainer MELALUI jadwal.
     final response = await _supabase
         .from('booking')
-        .select(
-          '*, jadwal!inner(*, trainer(*))',
-        ) // Ambil trainer yang berelasi dengan jadwal
+        .select('*, jadwal!inner(*, trainer(*))')
         .eq('user_id', userId)
         .order('created_at', ascending: false);
 
@@ -96,11 +91,17 @@ class _HistoryBookingPageState extends State<HistoryBookingPage> {
   Widget build(BuildContext context) {
     final userName = _supabase.auth.currentUser?.email ?? 'User';
 
+    final double horizontalPadding = Responsive.isDesktop(context)
+        ? 100
+        : Responsive.isTablet(context)
+        ? 60
+        : 20;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 100.0),
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -118,7 +119,6 @@ class _HistoryBookingPageState extends State<HistoryBookingPage> {
               FutureBuilder<List<Map<String, dynamic>>>(
                 future: _futureBookings,
                 builder: (context, snapshot) {
-                  // ... (Sisa dari widget build tidak berubah) ...
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
@@ -127,36 +127,41 @@ class _HistoryBookingPageState extends State<HistoryBookingPage> {
                   }
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return const Center(
-                      child: Text(
-                        'You have no booking history yet.',
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 50.0),
+                        child: Text(
+                          'You have no booking history yet.',
+                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                        ),
                       ),
                     );
                   }
 
                   final bookings = snapshot.data!;
 
-                  return LayoutBuilder(
-                    builder: (context, constraints) {
-                      int crossAxisCount = 3;
-                      if (constraints.maxWidth < 1200) crossAxisCount = 2;
-                      if (constraints.maxWidth < 800) crossAxisCount = 1;
+                  final int crossAxisCount = Responsive.isDesktop(context)
+                      ? 3
+                      : Responsive.isTablet(context)
+                      ? 2
+                      : 1;
 
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: crossAxisCount,
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                          childAspectRatio: 2.2,
-                        ),
-                        itemCount: bookings.length,
-                        itemBuilder: (context, index) {
-                          final booking = bookings[index];
-                          return BookingCard(bookingData: booking);
-                        },
-                      );
+                  final double childAspectRatio = Responsive.isMobile(context)
+                      ? 2.0
+                      : 2.2;
+
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      childAspectRatio: childAspectRatio,
+                    ),
+                    itemCount: bookings.length,
+                    itemBuilder: (context, index) {
+                      final booking = bookings[index];
+                      return BookingCard(bookingData: booking);
                     },
                   );
                 },

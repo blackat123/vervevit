@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Tambahkan package intl: flutter pub add intl
+import 'package:intl/intl.dart';
 
 class BookingCard extends StatelessWidget {
   final Map<String, dynamic> bookingData;
 
   const BookingCard({super.key, required this.bookingData});
 
-  // Helper untuk mendapatkan warna berdasarkan status
   Color _getStatusColor(String status) {
     switch (status) {
       case 'Completed':
@@ -20,7 +19,6 @@ class BookingCard extends StatelessWidget {
     }
   }
 
-  // Helper untuk mendapatkan ikon berdasarkan status
   IconData _getStatusIcon(String status) {
     switch (status) {
       case 'Completed':
@@ -38,8 +36,6 @@ class BookingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final jadwal = bookingData['jadwal'];
     final status = bookingData['status'] ?? 'Unknown';
-
-    // DIUBAH: Akses data trainer dari dalam objek 'jadwal'
     final trainer = jadwal?['trainer'];
 
     if (jadwal == null || trainer == null) {
@@ -53,7 +49,6 @@ class BookingCard extends StatelessWidget {
       );
     }
 
-    // Formatting tanggal dan jam
     final date = DateTime.parse(jadwal['tanggal']);
     final formattedDate = DateFormat('EEEE, d MMMM yyyy').format(date);
     final startTime = (jadwal['jam_mulai'] as String).substring(0, 5);
@@ -78,12 +73,15 @@ class BookingCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Trainer: ${trainer['nama']}',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: Color(0xFF343A40),
+                Expanded(
+                  child: Text(
+                    'Trainer: ${trainer['nama']}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color(0xFF343A40),
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Container(
@@ -141,7 +139,7 @@ class BookingCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const Spacer(),
             Align(
               alignment: Alignment.bottomRight,
               child: Chip(

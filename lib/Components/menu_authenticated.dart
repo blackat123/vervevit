@@ -1,7 +1,6 @@
-// menu_authenticated.dart
-
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vervefit/responsive.dart';
 import 'package:vervefit/Screens/loginpage.dart';
 
 class MenuAuthenticated extends StatelessWidget {
@@ -10,6 +9,14 @@ class MenuAuthenticated extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Responsive(
+      mobile: _buildMobileLayout(context),
+      tablet: _buildDesktopLayout(context),
+      desktop: _buildDesktopLayout(context),
+    );
+  }
+
+  Widget _buildDesktopLayout(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: Row(
@@ -18,19 +25,20 @@ class MenuAuthenticated extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _menuItem(context, title: 'Home'),
-              _menuItem(context, title: 'About Us'),
-              _menuItem(context, title: 'Contact Us'),
-              _menuItem(context, title: 'Help'),
-              // BARU: Menu History yang aktif di halaman ini
+              _menuItem(context, title: 'Home', isDesktop: true),
+              _menuItem(context, title: 'About Us', isDesktop: true),
+              _menuItem(context, title: 'Contact Us', isDesktop: true),
+              _menuItem(context, title: 'Help', isDesktop: true),
               _menuItem(
                 context,
                 title: 'History',
                 isActive: true,
                 onNavigate: () {},
+                isDesktop: true,
               ),
             ],
           ),
+
           Row(
             children: [
               Text(
@@ -41,25 +49,48 @@ class MenuAuthenticated extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 25),
-              ElevatedButton(
-                onPressed: () async {
-                  // Logic untuk Sign Out
-                  await Supabase.instance.client.auth.signOut();
-                  if (context.mounted) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+              _signOutButton(context),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMobileLayout(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Column(
+        children: [
+          Column(
+            children: [
+              Text(
+                'Welcome, $userName!',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-                child: const Text('Sign Out'),
+              ),
+              const SizedBox(height: 15),
+              _signOutButton(context),
+            ],
+          ),
+          const SizedBox(height: 30),
+
+          Wrap(
+            runSpacing: 20,
+            spacing: 20,
+            alignment: WrapAlignment.center,
+            children: [
+              _menuItem(context, title: 'Home'),
+              _menuItem(context, title: 'About Us'),
+              _menuItem(context, title: 'Contact Us'),
+              _menuItem(context, title: 'Help'),
+              _menuItem(
+                context,
+                title: 'History',
+                isActive: true,
+                onNavigate: () {},
               ),
             ],
           ),
@@ -68,18 +99,40 @@ class MenuAuthenticated extends StatelessWidget {
     );
   }
 
+  Widget _signOutButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        await Supabase.instance.client.auth.signOut();
+        if (context.mounted) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+            (route) => false,
+          );
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      child: const Text('Sign Out'),
+    );
+  }
+
   Widget _menuItem(
     BuildContext context, {
     required String title,
     bool isActive = false,
     VoidCallback? onNavigate,
+    bool isDesktop = false,
   }) {
     return GestureDetector(
       onTap: onNavigate,
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: Padding(
-          padding: const EdgeInsets.only(right: 75),
+          padding: EdgeInsets.only(right: isDesktop ? 75 : 0),
           child: Column(
             children: [
               Text(

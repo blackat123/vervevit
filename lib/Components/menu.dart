@@ -19,12 +19,7 @@ class Menu extends StatelessWidget {
               _menuItem(title: 'Help'),
             ],
           ),
-          Row(
-            children: [
-              _menuItem(title: 'Sign In', isActive: true),
-              _registerButton(),
-            ],
-          ),
+          Row(children: [_menuItem(title: 'Sign In', isActive: true)]),
         ],
       ),
     );
@@ -53,27 +48,6 @@ class Menu extends StatelessWidget {
                 )
               : SizedBox(),
         ],
-      ),
-    );
-  }
-
-  Widget _registerButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            spreadRadius: 10,
-            blurRadius: 12,
-          ),
-        ],
-      ),
-      child: Text(
-        'Register',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
       ),
     );
   }

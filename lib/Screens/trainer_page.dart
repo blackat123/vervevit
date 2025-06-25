@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'book_schedule_page.dart';
 
 class TrainerPage extends StatefulWidget {
   final String selectedLevel;
@@ -57,7 +58,11 @@ class _TrainerPageState extends State<TrainerPage> {
                       'Umur: ${trainer['umur']}, No. Telp: ${trainer['no_telp']}',
                     ),
                     onTap: () {
-                      // Will go to booking page
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => BookSchedulePage(trainer_id: trainer['id']),
+                        ),
+                      );
                     },
                   ),
                 );

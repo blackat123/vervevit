@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../models/trainer.dart';
 
 class BookSchedulePage extends StatefulWidget {
-  final Trainer trainer;
-  const BookSchedulePage({super.key, required this.trainer});
+  final int trainer_id;
+  const BookSchedulePage({super.key, required this.trainer_id});
 
   @override
   State<BookSchedulePage> createState() => _BookSchedulePageState();
@@ -23,7 +22,7 @@ class _BookSchedulePageState extends State<BookSchedulePage> {
     final res = await Supabase.instance.client
         .from('jadwal')
         .select()
-        .eq('trainer_id', widget.trainer.id);
+        .eq('trainer_id', widget.trainer_id);
 
     print('>> Data jadwal dari Supabase: $res');
 
@@ -42,7 +41,7 @@ class _BookSchedulePageState extends State<BookSchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Booking - ${widget.trainer.nama}')),
+      appBar: AppBar(title: Text('Booking - ${widget.trainer_id}')),
       body: ListView.builder(
         itemCount: jadwal.length,
         itemBuilder: (context, index) {

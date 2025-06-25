@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vervefit/Screens/about_us.dart';
+import 'package:vervefit/Screens/contact_us.dart';
 import 'package:vervefit/Screens/history_booking_page.dart';
+import 'package:vervefit/Screens/landing.dart';
 import 'package:vervefit/responsive.dart';
 import 'package:vervefit/Screens/loginpage.dart';
 
@@ -37,7 +40,11 @@ class MenuAuthenticated extends StatelessWidget {
                 title: 'Home',
                 isActive: activeMenu == 'home',
                 onNavigate: () {
-                  Navigator.of(context).pushReplacementNamed('/landing');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const LandingPage(),
+                    ),
+                  );
                 },
                 isDesktop: true,
               ),
@@ -46,7 +53,11 @@ class MenuAuthenticated extends StatelessWidget {
                 title: 'About Us',
                 isActive: activeMenu == 'about',
                 onNavigate: () {
-                  Navigator.of(context).pushReplacementNamed('/about');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const AboutUsPage(),
+                    ),
+                  );
                 },
                 isDesktop: true,
               ),
@@ -55,7 +66,11 @@ class MenuAuthenticated extends StatelessWidget {
                 title: 'Contact Us',
                 isActive: activeMenu == 'contact',
                 onNavigate: () {
-                  Navigator.of(context).pushReplacementNamed('/contact');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ContactUsPage(),
+                    ),
+                  );
                 },
                 isDesktop: true,
               ),
@@ -64,7 +79,11 @@ class MenuAuthenticated extends StatelessWidget {
                 title: 'History',
                 isActive: activeMenu == 'history',
                 onNavigate: () {
-                  Navigator.of(context).pushReplacementNamed('/history');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const HistoryBookingPage(),
+                    ),
+                  );
                 },
                 isDesktop: true,
               ),

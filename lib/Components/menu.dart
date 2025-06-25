@@ -25,7 +25,6 @@ class Menu extends StatelessWidget {
               _menuItem(title: 'Home', isDesktop: true),
               _menuItem(title: 'About Us', isDesktop: true),
               _menuItem(title: 'Contact Us', isDesktop: true),
-              _menuItem(title: 'Help', isDesktop: true),
             ],
           ),
           Row(

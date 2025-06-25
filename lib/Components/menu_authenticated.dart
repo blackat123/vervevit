@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vervefit/Screens/history_booking_page.dart';
 import 'package:vervefit/responsive.dart';
 import 'package:vervefit/Screens/loginpage.dart';
 
@@ -28,12 +29,17 @@ class MenuAuthenticated extends StatelessWidget {
               _menuItem(context, title: 'Home', isDesktop: true),
               _menuItem(context, title: 'About Us', isDesktop: true),
               _menuItem(context, title: 'Contact Us', isDesktop: true),
-              _menuItem(context, title: 'Help', isDesktop: true),
               _menuItem(
                 context,
                 title: 'History',
                 isActive: true,
-                onNavigate: () {},
+                onNavigate: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const HistoryBookingPage(),
+                    ),
+                  );
+                },
                 isDesktop: true,
               ),
             ],

@@ -73,7 +73,7 @@ class LandingPage extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) =>
-                  const TrainerPage(selectedLevel: 'Beginner'),
+                  TrainerPage(selectedLevel: 'Beginner'),
             ),
           );
         }),
@@ -82,7 +82,7 @@ class LandingPage extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) =>
-                  const TrainerPage(selectedLevel: 'Intermediate'),
+                  TrainerPage(selectedLevel: 'Intermediate'),
             ),
           );
         }),
@@ -91,7 +91,7 @@ class LandingPage extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) =>
-                  const TrainerPage(selectedLevel: 'Advanced'),
+                  TrainerPage(selectedLevel: 'Advanced'),
             ),
           );
         }),

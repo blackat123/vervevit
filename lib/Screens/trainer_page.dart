@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'book_schedule_page.dart';
 import 'package:vervefit/Components/trainer_card.dart';
+import 'package:vervefit/Components/menu_authenticated.dart'; 
 import 'package:vervefit/responsive.dart';
 
 class TrainerPage extends StatefulWidget {
   final String selectedLevel;
+  final userName = Supabase.instance.client.auth.currentUser?.email ?? 'User'; 
 
-  const TrainerPage({super.key, required this.selectedLevel});
+  TrainerPage({super.key, required this.selectedLevel});
 
   @override
   State<TrainerPage> createState() => _TrainerPageState();
@@ -44,26 +46,15 @@ class _TrainerPageState extends State<TrainerPage> {
             ? 60
             : 20;
 
-    final int crossAxisCount = Responsive.isDesktop(context)
-        ? 3
-        : Responsive.isTablet(context)
-            ? 2
-            : 1;
-
-    final double childAspectRatio = Responsive.isDesktop(context)
-    ? 1.4
-    : Responsive.isTablet(context)
-        ? 1.3
-        : 1.1;
-
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            MenuAuthenticated(userName: widget.userName, activeMenu: ''), 
             Row(
               children: [
                 IconButton(

@@ -12,7 +12,7 @@ class ContactUsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), // Konsisten
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
         child: ListView(
           children: [
             MenuAuthenticated(userName: userName, activeMenu: 'contact'), 

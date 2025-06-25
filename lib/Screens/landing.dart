@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vervefit/Screens/trainer_page.dart';
-import 'package:vervefit/Components/menu_authenticated.dart'; // Tambahkan import ini
-import 'package:supabase_flutter/supabase_flutter.dart'; // Jika ingin ambil nama user
+import 'package:vervefit/Components/menu_authenticated.dart'; 
+import 'package:supabase_flutter/supabase_flutter.dart'; 
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -9,22 +9,21 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final userName = Supabase.instance.client.auth.currentUser?.email ?? 'User'; // Ambil nama user
+    final userName = Supabase.instance.client.auth.currentUser?.email ?? 'User'; 
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), // Konsisten
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), 
           child: Column(
             children: [
-              MenuAuthenticated(userName: userName, activeMenu: 'home'), // Tambahkan navbar di sini
+              MenuAuthenticated(userName: userName, activeMenu: 'home'), 
               Expanded(
                 child: size.width > 800
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Ilustrasi Gambar
                           Expanded(
                             child: Image.asset(
                               'images/illustration2.png',
@@ -32,7 +31,6 @@ class LandingPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 50),
-                          // Konten Teks dan Tombol
                           Expanded(child: _buildContent(context)),
                         ],
                       )

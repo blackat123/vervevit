@@ -9,12 +9,12 @@ import 'package:vervefit/Screens/loginpage.dart';
 
 class MenuAuthenticated extends StatelessWidget {
   final String userName;
-  final String activeMenu; // Tambahkan ini
+  final String activeMenu; 
 
   const MenuAuthenticated({
     super.key,
     required this.userName,
-    required this.activeMenu, // Tambahkan ini
+    required this.activeMenu, 
   });
 
   @override

@@ -12,11 +12,11 @@ class AboutUsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), // Konsisten
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MenuAuthenticated(userName: userName, activeMenu: 'about'), // Navbar di body
+            MenuAuthenticated(userName: userName, activeMenu: 'about'), 
             const SizedBox(height: 24),
             const Text(
               'About VerveFit',

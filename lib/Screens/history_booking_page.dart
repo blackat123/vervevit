@@ -101,7 +101,7 @@ class _HistoryBookingPageState extends State<HistoryBookingPage> {
       backgroundColor: const Color(0xFFF8F9FA),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), // Konsisten
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30), 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

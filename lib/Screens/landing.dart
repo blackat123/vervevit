@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vervefit/Screens/trainer_page.dart';
+import 'package:vervefit/Components/menu_authenticated.dart'; // Tambahkan import ini
+import 'package:supabase_flutter/supabase_flutter.dart'; // Jika ingin ambil nama user
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -7,40 +9,48 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final userName = Supabase.instance.client.auth.currentUser?.email ?? 'User'; // Ambil nama user
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: size.width > 800
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Ilustrasi Gambar
-                    Expanded(
-                      child: Image.asset(
-                        'images/illustration2.png',
-                        height: size.height * 0.8,
+          child: Column(
+            children: [
+              MenuAuthenticated(userName: userName, activeMenu: 'home'), // Tambahkan navbar di sini
+              Expanded(
+                child: size.width > 800
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Ilustrasi Gambar
+                          Expanded(
+                            child: Image.asset(
+                              'images/illustration2.png',
+                              height: size.height * 0.8,
+                            ),
+                          ),
+                          const SizedBox(width: 50),
+                          // Konten Teks dan Tombol
+                          Expanded(child: _buildContent(context)),
+                        ],
+                      )
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'images/illustration2.png',
+                              height: size.height * 0.4,
+                            ),
+                            const SizedBox(height: 30),
+                            _buildContent(context),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 50),
-                    // Konten Teks dan Tombol
-                    Expanded(child: _buildContent(context)),
-                  ],
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'images/illustration2.png',
-                        height: size.height * 0.4,
-                      ),
-                      const SizedBox(height: 30),
-                      _buildContent(context),
-                    ],
-                  ),
-                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

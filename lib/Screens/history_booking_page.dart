@@ -105,7 +105,7 @@ class _HistoryBookingPageState extends State<HistoryBookingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MenuAuthenticated(userName: userName),
+              MenuAuthenticated(userName: userName, activeMenu: 'history'),
               const SizedBox(height: 40),
               const Text(
                 'My Booking History',

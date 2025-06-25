@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:vervefit/Components/menu_authenticated.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ContactUsPage extends StatelessWidget {
   const ContactUsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userName = Supabase.instance.client.auth.currentUser?.email ?? 'User';
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Contact Us'),
-        backgroundColor: Colors.deepPurple,
-      ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: ListView(
           children: [
+            MenuAuthenticated(userName: userName, activeMenu: 'contact'), // Navbar di body
+            const SizedBox(height: 24),
             const Text(
               'Get in Touch with Us',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -24,7 +27,6 @@ class ContactUsPage extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.black54),
             ),
             const SizedBox(height: 30),
-
             _buildContactCard(
               icon: Icons.email,
               title: 'Email',

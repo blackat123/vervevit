@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:vervefit/Screens/landing.dart';
 import 'package:vervefit/responsive.dart';
 import 'package:vervefit/Screens/history_booking_page.dart';
 
@@ -35,7 +36,7 @@ class _BodyState extends State<Body> {
         );
 
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HistoryBookingPage()),
+          MaterialPageRoute(builder: (context) => const LandingPage()),
         );
       }
     } on AuthException catch (error) {
